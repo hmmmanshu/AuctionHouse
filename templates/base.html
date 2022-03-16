@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>Auction Rush</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
+</head>
+<body>
+      {% block sidebar %}
+        <ul class="navbar">
+          <li class="auction-rush-button">
+              <a style="padding: 4px;" class="navbar-link" href="{% url 'index' %}">
+                <img height="40px" src="https://img.icons8.com/fluency/240/000000/home.png"/>
+              </a>
+          </li>
+          <li class="navbar-item"><a class="navbar-link" href="{% url 'auctions:auctions' %}">All auctions</a></li>
+          {% if user.is_authenticated %}
+          <li class="navbar-item"><a class="navbar-link" href="{% url 'my_auctions' %}">My auctions</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="{% url 'my_bids' %}">My bids</a></li>
+          <li class="create-auction-button"><a class="navbar-link" href="{% url 'auctions:create' %}">Create an auction</a> </li>
+          {% endif %}
+          {% if user.is_authenticated %}
+            <li class="navbar-item-right"><a class="navbar-link" href="{% url 'logout' %}?next={{request.path}}">Logout</a></li>
+            <li class="navbar-item-right"><span class="navbar-text">Logged in as: <span class="username">{{ user.get_username }}</span></span></li>
+          {% else %}
+            <li class="navbar-item-right"><a class="navbar-link" href="{% url 'login' %}?next={{request.path}}">Login</a></li>
+            <li class="navbar-item-right"><a class="navbar-link" href="{% url 'register' %}?next={{request.path}}">Register</a></li>
+            <li class="navbar-item-right"><a class="navbar-link" href="/admin">Admin</a></li>
+          {% endif %}
+        </ul>
+     {% endblock %}
+      <div class="main-content">{% block content %}{% endblock %}</div>
+</body>
+</html>

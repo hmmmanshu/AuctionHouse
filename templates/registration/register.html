@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="register-wrapper">
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <br>
+        <div class="center_div">
+            <button class="submit_button" type="submit">Sign Up</button>
+        </div>
+        {% if error_message %}
+            <p class="error">
+            Oops! There was some error. Please refer to the details above to create the password.
+            </p>
+        {% endif %}
+    </form>
+
+</div>
+
+{% endblock %}
