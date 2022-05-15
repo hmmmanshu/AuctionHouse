@@ -14,3 +14,11 @@ _Project under development_
 `python manage.py runserver`
 
 Go to the address provided in the output.
+
+## Creating a superuser
+
+A superuser has all the persmission to view, modify the database or the users.
+
+`python manage.py createsuperuser`
+
+Then go to the `home_url`/`admin` to access the admin page.
